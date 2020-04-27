@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutterfire/services/auth.dart';
 
-class SignIn extends StatefulWidget {
+class Register extends StatefulWidget {
   final Function view;
-  SignIn({this.view});
+  Register({this.view});
   @override
-  _SignInState createState() => _SignInState();
+  _RegisterState createState() => _RegisterState();
 }
 
-class _SignInState extends State<SignIn> {
-  final _formkey = GlobalKey<FormState>();
+class _RegisterState extends State<Register> {
   final AuthService _auth = AuthService();
+  final _formkey = GlobalKey<FormState>();
+
   String email = '';
   String password = '';
+  String error = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,14 +23,14 @@ class _SignInState extends State<SignIn> {
       appBar: AppBar(
         backgroundColor: Colors.brown[400],
         elevation: 0.0,
-        title: Text("Sign in to Brew Crew"),
+        title: Text("Sign up to Brew Crew"),
         actions: <Widget>[
           FlatButton.icon(
               onPressed: () {
                 widget.view();
               },
               icon: Icon(Icons.person),
-              label: Text('Register'))
+              label: Text('Sign in'))
         ],
       ),
       body: Container(
@@ -39,21 +42,24 @@ class _SignInState extends State<SignIn> {
                 SizedBox(
                   height: 20,
                 ),
-                //email field
+                // email feild
                 TextFormField(
                     validator: (val) => val.isEmpty ? 'Enter an email.' : null,
                     decoration: InputDecoration(labelText: 'Email'),
                     onChanged: (val) {
-                      setState(() {
-                        email = val;
-                      });
+                      setState(
+                        () {
+                          email = val;
+                        },
+                      );
                     }),
                 SizedBox(
                   height: 20,
                 ),
-                //password field
+                // password field
                 TextFormField(
-                  validator: (val) => val.isEmpty ? 'Enter a password.' : null,
+                  validator: (val) =>
+                      val.length < 6 ? 'Enter a password 6+ chars long.' : null,
                   decoration: InputDecoration(labelText: 'Password'),
                   onChanged: (val) {
                     setState(() {
@@ -68,16 +74,21 @@ class _SignInState extends State<SignIn> {
                 RaisedButton(
                   onPressed: () async {
                     if (_formkey.currentState.validate()) {
-                      print(email);
-                      print(password);
+                      dynamic result = await _auth.registerWithEmailAndPassword(
+                          email, password);
+                      if (result == null) {
+                        setState(() => error = 'Please supply a valid email');
+                      }
                     }
                   },
                   color: Colors.pink[400],
                   child: Text(
-                    'Sign In',
+                    'Register',
                     style: TextStyle(color: Colors.white),
                   ),
-                )
+                ),
+                SizedBox(height: 12),
+                Text(error, style: TextStyle(color: Colors.red, fontSize: 18)),
               ],
             )),
       ),
