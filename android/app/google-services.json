@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "690812501516",
+    "firebase_url": "https://flutterfire-f7ddb.firebaseio.com",
+    "project_id": "flutterfire-f7ddb",
+    "storage_bucket": "flutterfire-f7ddb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:690812501516:android:ca2842b4fa8d3ef209b829",
+        "android_client_info": {
+          "package_name": "com.priyanshuvishnoi.flutterfire"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "690812501516-qatbo09n5pvnph89g6dv1pj6skrdkmep.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXkeIUnZuYTxtf_gcF5cLMQG1qEiQZ0HE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "690812501516-qatbo09n5pvnph89g6dv1pj6skrdkmep.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
